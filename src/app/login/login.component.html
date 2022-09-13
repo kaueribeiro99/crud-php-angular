@@ -1,0 +1,25 @@
+<div class="wrapper fadeInDown mt-4">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <h2 class="active">CKODE SOLUTIONS</h2>
+    <div class="fadeIn first">
+        <i class="fas fa-users icone"></i>
+    </div>
+
+    <!-- Login Form -->
+    <form>
+      <div class="mb-3">
+        <input type="email" class=" fadeIn second form-control" id="email" placeholder="E-mail" (input)="this.email = $event.target.value">
+      </div>
+      <div class="mb-3">
+        <input type="password" class="fadeIn third form-control" id="password" placeholder="Senha" (input)="this.password = $event.target.value">
+      </div>
+      <div class="d-grid gap-2 mx-auto justify-content-md-end">
+        <button type="button" class="fadeIn fourth btn btn-info" (click)="login(this.email, this.password)">Entrar</button>
+      </div>
+    </form>
+  </div>
+</div>
+

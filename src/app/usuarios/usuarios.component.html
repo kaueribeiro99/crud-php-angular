@@ -1,0 +1,90 @@
+<div class="container mt-4">
+<span class="titulo"> Usuários</span>
+<hr class="mb-4">
+
+<div class="row">
+  <div class="col-lg-8 col-md-6 col-sm-12">
+      <button class="btn btn-success ml-2" data-toggle="modal" data-target="#modal">Adicionar</button><br><br>
+  </div>
+<div class="col-lg-4 col-md-6 col-sm-12">
+    <form class="form-inline my-2 my-lg-0">
+        <input style="margin-left: 210px;" class="form-control mr-sm-2" type="search"
+        (input)="listar($event.target.value)"
+        (change)="this.textoBuscar = $event.target.value"
+        placeholder="Pesquisar" aria-label="Pesquisar">
+    </form>
+</div>
+
+</div>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="name">Nome</th>
+        <th scope="email">E-mail</th>
+        <th scope="password">Senha</th>
+        <th scope="action">Ações</th>
+    </tr>
+    </thead>
+<tbody>
+<tr *ngFor="let dado of lista">
+
+  <td>{{dado.name}}</td>
+  <td>{{dado.email}}</td>
+  <td>{{dado.password}}</td>
+  <td>
+      <a (click)="dadosEditar(dado.name, dado.email, dado.password, dado.id)" data-toggle="modal" data-target="#modal"><i class="far fa-edit text-info mr-2"></i></a>
+      <a (click)="confirmModal()" title="Excluir Registro"><i class="far fa-trash-alt text-danger"></i></a>
+<!--      Preciso fazer que ao clicar no "Sim" do modal, exclua o usuario de acordo com o id - excluir(dado.id)-->
+  </td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<!--CONTEUDO DA JANELA MODAL DE INSERIR-->
+<div id="modal" class="modal fade" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{title}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+            <div class="form-group">
+              <label>Nome</label>
+              <input type="text" class="form-control"
+              (input)="this.name = $event.target.value"
+              value="{{name}}" placeholder="Insira seu nome" required />
+            </div>
+            <div class="form-group">
+               <label>E-mail</label>
+               <input type="email" class="form-control"
+               (input)="this.email = $event.target.value"
+               value="{{email}}" placeholder="Insira seu e-mail" required />
+            </div>
+            <div class="form-group">
+               <label>Senha</label>
+               <input type="password" class="form-control"
+               (input)="this.password = $event.target.value"
+               value="{{password}}" placeholder="Insira sua senha" required />
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button *ngIf="id == ''" type="button" class="btn btn-primary" (click)="cadastrar()">Salvar</button>
+            <button *ngIf="id != ''" type="button" class="btn btn-primary" (click)="editar()">Salvar</button>
+            <button type="button" class="btn btn-secondary" (click)="listar(this.textoBuscar) && this.reload()">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
